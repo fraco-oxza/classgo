@@ -8,6 +8,6 @@ setup(
         "click"],
     entry_points="""
         [console_scripts]
-        class=go_class.scripts:cli
+        class=class_go.scripts:cli
     """
 )
