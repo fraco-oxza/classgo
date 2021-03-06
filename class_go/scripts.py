@@ -1,8 +1,11 @@
-import webbrowser
+from webbrowser import open
+from subprocess import Popen
 
 import click
+from click.utils import echo
 
 from .db import get_db
+from .db import delete_db
 from . import converter
 
 def print_version(ctx, param, value):
@@ -36,7 +39,7 @@ def add(name, nick, teacher, link):
     # Revisa si se indexo el apodo en el comando
     if nick is None:
         # En caso de que no lo haya ingresado, pregunta si quiere agregarlo
-        if click.confirm(f"¿Tfiene {name} algún sobrenombre?"):
+        if click.confirm(f"¿Tiene {name} algún sobrenombre?"):
             nick = click.prompt("Cuéntame cual", type=str)
 
     # Revisa si se indexo el profesor en el comando
@@ -86,4 +89,31 @@ def add(name, nick, teacher, link):
     db.commit()
     db.close()
 
+@click.command("goto")
+@click.argument("NAME")
+def goto(name):
+    db, c = get_db()
+
+    c.execute(f"SELECT * FROM class WHERE name=\"{name}\"")
+    the_class = c.fetchone()
+    
+
+    class_name = click.style(the_class[0], fg="red", bold=True)
+    class_teacher = click.style(the_class[1], fg="yellow")
+    click.echo("\nConectandote a " + class_name + " con " + class_teacher)
+    
+    if not open(the_class[2]):
+        click.echo(f"\nNo he podido abrir el link :(\nPero aquí lo tienes: {the_class[2]}")
+
+    if click.confirm("¿Desea que ejecute DroidCam?"):
+        Popen("/usr/bin/droidcam")
+        
+
+@click.command("delete_db")
+def delete_db_comand():
+    delete_db() 
+    
+
 cli.add_command(add)
+cli.add_command(goto)
+cli.add_command(delete_db_comand)

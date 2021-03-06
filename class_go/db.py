@@ -3,8 +3,10 @@
 # funciones que permiten la conexión
 # con la base de datos SQLite3
 # ===================================
-
-from os import path as os_path
+from os import mkdir
+from os.path import isdir 
+from os import remove
+from pathlib import Path
 import sqlite3
 
 import click
@@ -17,12 +19,14 @@ def get_db(auto_init=True):
     Funcion que retornara acceso la base de
     datos
     """
-    dirname = os_path.dirname(__file__) #Directorio donde se encuentra este archivo
-    path = os_path.join(dirname, "database/") #Directorio donde se encuentra la base de datos
      
-    print(path)
+    home = str(Path.home())
+    path = home + "/.classgo"
 
-    db = sqlite3.connect(path + "data.db") # Se conecta a la base de datos
+    if not isdir(path):
+        mkdir(path)
+
+    db = sqlite3.connect(path + "/data.db") # Se conecta a la base de datos
     c = db.cursor() #Crea un cursor
 
     if (auto_init): #Revisa si la base de datos tiene las tablas creadas
@@ -56,4 +60,10 @@ def init_db() -> None:
         pass
 
     db.commit()
-            
+
+def delete_db() -> None:
+    home = str(Path.home())
+    path = home + "/.classgo"
+
+    remove(path + "/data.db")
+
