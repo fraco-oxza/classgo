@@ -23,16 +23,25 @@ def cli():
 @click.option("--teacher","-t", help="The teacher's name")
 @click.option("--link", "-l", help="The link to the meet")
 def add(name, nick, teacher, link):
+    # TODO: Cambiar esta funcion a otro archivo
+    """
+    Funcion encargada de añadir una clase y su horario
+    a la base de datos 
+    """
 
     click.echo("\nAñadiremos " + click.style(name, fg="bright_cyan", bold=True) + " a las clases.")
 
     click.secho("Necesito saber algunas cosas.\n", bold=True)
 
+    # Revisa si se indexo el apodo en el comando
     if nick is None:
-        if click.confirm(f"¿Tiene {name} algún sobrenombre?"):
+        # En caso de que no lo haya ingresado, pregunta si quiere agregarlo
+        if click.confirm(f"¿Tfiene {name} algún sobrenombre?"):
             nick = click.prompt("Cuéntame cual", type=str)
 
+    # Revisa si se indexo el profesor en el comando
     if teacher is None:
+        # En caso de que no lo haya ingresado, pregunta cual es
         teacher = click.prompt("¿Cuál es el nombre del profesor?")
 
     if link is None:

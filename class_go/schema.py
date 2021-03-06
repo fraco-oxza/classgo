@@ -1,3 +1,8 @@
+# ============================
+# Esquema que se utiliza para
+# inicializar la base de datos
+# ============================
+
 instructions = [
     """
     CREATE TABLE class (

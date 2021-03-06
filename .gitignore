@@ -1,0 +1,4 @@
+go_class/data/data.db
+go_class/__pycache__/
+.vscode
+classgo.egg-info/
