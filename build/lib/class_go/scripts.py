@@ -89,9 +89,9 @@ def add(name, nick, teacher, link):
     db.commit()
     db.close()
 
-@click.command("connect")
+@click.command("goto")
 @click.argument("NAME")
-def connect(name):
+def goto(name):
     db, c = get_db()
 
     c.execute(f"SELECT * FROM class WHERE name=\"{name}\"")
@@ -107,22 +107,13 @@ def connect(name):
 
     if click.confirm("¿Desea que ejecute DroidCam?"):
         Popen("/usr/bin/droidcam")
-    db.close() 
+        
 
 @click.command("delete_db")
 def delete_db_comand():
     delete_db() 
-
-@click.command("list")
-def list_command():
-    db, c = get_db()
     
-    c.execute("SELECT * FROM class")
-    classes = c.fetchall()
 
-    print(classes)
-
-cli.add_command(list_command)
 cli.add_command(add)
-cli.add_command(connect)
+cli.add_command(goto)
 cli.add_command(delete_db_comand)
