@@ -11,7 +11,7 @@ def date_list(date:str) -> list:
 
     days    = date.split(",") #Divide el string
     c_days  = [] #Se almacenara la lista revisada
-    
+
     for day in days:    
         #Se revisa la lista para que sea un entero y este en el rango 0-7
         c_days.append(int(day)) #Se transforma a entero
@@ -24,11 +24,11 @@ def date_str(days:list or tuple) -> str:
     # [2,3,7] -> "2,3,7"
 
     c_days = "" #Se almacenara el str
-    
+
     for day in days:
         #elemento por elemento se añade y se suma una coma al final
         c_days += str(day) + "," 
-    
+
     return c_days[:-1] #Se devuelve sin la ultima coma, ya que sobra
 
 def hour_list(hour:str) -> list:
@@ -37,7 +37,7 @@ def hour_list(hour:str) -> list:
 
     c_hour = hour.split(":")    #Se divide el string
     assert len(c_hour) == 2    #Se revisa que solo tenga 2 elementos
-    
+
     #Se convierte a numero entero
     c_hour[0] = int(c_hour[0])  
     c_hour[1] = int(c_hour[1])

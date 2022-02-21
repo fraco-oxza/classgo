@@ -53,7 +53,7 @@ def add(name, nick, teacher, link):
     db, c = get_db()
 
     c.execute(f"INSERT INTO class VALUES (\"{name}\", \"{teacher}\", \"{link}\")")
-    
+
     db.commit()
     db.close
 
@@ -83,7 +83,7 @@ def add(name, nick, teacher, link):
                 click.echo("\n" + click.style("Error", bg="red", fg="white") + click.style(": Por favor siga las instrucciones", bold=True))
             except ValueError:
                 click.echo("\n" + click.style("Error", bg="red", fg="white") + click.style(": Por favor siga las instrucciones", bold=True))
-            
+
             click.pause("\nToque cualquier tecla para volver a intentarlo.")
         c.execute(f"INSERT INTO bouquet VALUES (\"{d}\", \"{list_time[0]}\", \"{list_time[1]}\", \"{name}\")")
     db.commit()
@@ -96,12 +96,12 @@ def connect(name):
 
     c.execute(f"SELECT * FROM class WHERE name=\"{name}\"")
     the_class = c.fetchone()
-    
+
 
     class_name = click.style(the_class[0], fg="red", bold=True)
     class_teacher = click.style(the_class[1], fg="yellow")
     click.echo("\nConectandote a " + class_name + " con " + class_teacher)
-    
+
     if not open(the_class[2]):
         click.echo(f"\nNo he podido abrir el link :(\nPero aquí lo tienes: {the_class[2]}")
 
@@ -116,7 +116,7 @@ def delete_db_comand():
 @click.command("list")
 def list_command():
     db, c = get_db()
-    
+
     c.execute("SELECT * FROM class")
     classes = c.fetchall()
 
