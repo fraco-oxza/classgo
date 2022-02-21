@@ -19,7 +19,6 @@ def get_db(auto_init=True):
     Funcion que retornara acceso la base de
     datos
     """
-
     home = str(Path.home())
     path = home + "/.classgo"
 
