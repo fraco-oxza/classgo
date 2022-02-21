@@ -2,7 +2,6 @@ from webbrowser import open
 from subprocess import Popen
 
 import click
-from click.utils import echo
 
 from .db import get_db
 from .db import delete_db
