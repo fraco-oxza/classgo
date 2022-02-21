@@ -15,7 +15,8 @@ def date_list(date: str) -> list:
     for day in days:
         # Se revisa la lista para que sea un entero y este en el rango 0-7
         c_days.append(int(day))  # Se transforma a entero
-        assert int(day) > 0 and int(day) <= 7  # Se revisa el rango
+        if not (int(day) > 0 and int(day) <= 7):
+            raise AssertionError
 
     return c_days   # Se retorna la lista de enteros
 
@@ -38,14 +39,17 @@ def hour_list(hour: str) -> list:
     # "23:59" -> [23, 59]
 
     c_hour = hour.split(":")  # Se divide el string
-    assert len(c_hour) == 2  # Se revisa que solo tenga 2 elementos
+    if len(c_hour) != 2:
+        raise AssertionError
 
     # Se convierte a numero entero
     c_hour[0] = int(c_hour[0])
     c_hour[1] = int(c_hour[1])
 
     # Se revisa que sea una hora valida
-    assert c_hour[0] < 24 and c_hour[0] >= 0
-    assert c_hour[1] < 60 and c_hour[1] >= 0
+    if not (c_hour[0] < 24 and c_hour[0] >= 0):
+        raise AssertionError
+    if not (c_hour[1] < 60 and c_hour[1] >= 0):
+        raise AssertionError
 
     return c_hour  # Se retorna la hora convertida
