@@ -33,7 +33,6 @@ def add(name, nick, teacher, link):
     Funcion encargada de añadir una clase y su horario
     a la base de datos 
     """
-
     click.echo("\nAñadiremos " + click.style(name,
                fg="bright_cyan", bold=True) + " a las clases.")
 
